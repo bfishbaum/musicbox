@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { push } from 'connected-react-router';
+import { useSelector, useDispatch, connect } from 'react-redux';
 import Slider from 'react-input-slider';
 import {
 	play,
@@ -61,6 +62,7 @@ const renderControls = (state: MusicNoteState, dispatch: Function) => {
 				<Button className={styles.playButton} onClick={playButtonFunction}>{buttonText}</Button>
 				<Button className={styles.playButton} onClick={() => dispatch(randomize())}>Randomize</Button>
 				<Button className={styles.playButton} onClick={() => dispatch(restart())}>Restart</Button>
+				<Button className={styles.playButton} onClick={() => {window.location.href = "/soundboard"}}>Soundboard</Button>
 			</Row>
 			<Row>
 				<p>{state.bpm}</p>
@@ -78,7 +80,6 @@ const renderControls = (state: MusicNoteState, dispatch: Function) => {
 export function MusicNotes() {
 	const dispatch : Function = useDispatch();
 	const musicnotes = useSelector(selectAll)
-	console.log("called")
   return (
     <Container>
 			{renderControls(musicnotes, dispatch)}

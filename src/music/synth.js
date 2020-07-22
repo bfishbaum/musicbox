@@ -19,6 +19,10 @@ export const PlayNotes = (noteArray) => {
 	synth.triggerAttackRelease(notes, '8n')
 }
 
+export const PlayMyNote = (note, time) => {
+	synth.triggerAttackRelease(note, time.toString() + 'n')
+}
+
 export const TriggerAttackRelease = (note, time) => {
 	synth.triggerAttackRelease(note, time)
 }
