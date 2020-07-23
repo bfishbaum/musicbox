@@ -8,20 +8,16 @@ import './index.css';
 import App from './App';
 import { store, history } from './app/store';
 import * as serviceWorker from './serviceWorker';
-import { MusicNotes } from './features/musicnotes/Musicnotes';
-import { Soundboard } from './features/soundboard/Soundboard';
+// import { MusicNotes } from './features/musicnotes/Musicnotes';
+// import { Soundboard } from './features/soundboard/Soundboard';
+import { Toplevel } from './features/toplevel/Toplevel';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-		<ConnectedRouter history={history} noInitialPop> 
-			<Switch>
-				<Route exact path="/" component={MusicNotes} />
-				<Route path="/soundboard" component={Soundboard} />
-			</Switch>
-			</ConnectedRouter>
+			<Toplevel/>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

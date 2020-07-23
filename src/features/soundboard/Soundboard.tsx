@@ -29,7 +29,7 @@ const controlPanel = (noteTime: number, dispatch: Function) => {
 					xmax={128}
 					onChange={({x}) => dispatch(setNoteTime(x))}/>
 		</Row>
-		</div>
+		</div>	
 	)
 }
 
