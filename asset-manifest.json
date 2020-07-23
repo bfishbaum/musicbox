@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/musicbox/static/css/main.f39e631e.chunk.css",
-    "main.js": "/musicbox/static/js/main.62b05efc.chunk.js",
-    "main.js.map": "/musicbox/static/js/main.62b05efc.chunk.js.map",
+    "main.js": "/musicbox/static/js/main.bbd1754b.chunk.js",
+    "main.js.map": "/musicbox/static/js/main.bbd1754b.chunk.js.map",
     "runtime-main.js": "/musicbox/static/js/runtime-main.6b4c0e07.js",
     "runtime-main.js.map": "/musicbox/static/js/runtime-main.6b4c0e07.js.map",
     "static/css/2.af3c1da9.chunk.css": "/musicbox/static/css/2.af3c1da9.chunk.css",
     "static/js/2.9d6d58cd.chunk.js": "/musicbox/static/js/2.9d6d58cd.chunk.js",
     "static/js/2.9d6d58cd.chunk.js.map": "/musicbox/static/js/2.9d6d58cd.chunk.js.map",
     "index.html": "/musicbox/index.html",
-    "precache-manifest.36475d7b1394232147869482a7771104.js": "/musicbox/precache-manifest.36475d7b1394232147869482a7771104.js",
+    "precache-manifest.b69157c2abd80819829b30c0191a4eed.js": "/musicbox/precache-manifest.b69157c2abd80819829b30c0191a4eed.js",
     "service-worker.js": "/musicbox/service-worker.js",
     "static/css/2.af3c1da9.chunk.css.map": "/musicbox/static/css/2.af3c1da9.chunk.css.map",
     "static/css/main.f39e631e.chunk.css.map": "/musicbox/static/css/main.f39e631e.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.af3c1da9.chunk.css",
     "static/js/2.9d6d58cd.chunk.js",
     "static/css/main.f39e631e.chunk.css",
-    "static/js/main.62b05efc.chunk.js"
+    "static/js/main.bbd1754b.chunk.js"
   ]
 }
