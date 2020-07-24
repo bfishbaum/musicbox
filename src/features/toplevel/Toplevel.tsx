@@ -29,7 +29,7 @@ export function Toplevel() {
 						dispatch(pause())
 						dispatch(restart())
 				}
-				} }>
+			}}>
 				<Nav.Item>
 					<Nav.Link eventKey={"musicbox"}>Musicbox</Nav.Link>
 				</Nav.Item>
