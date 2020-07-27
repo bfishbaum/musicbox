@@ -11,7 +11,8 @@ import {
 	toggleNote,
 	selectAll,
 	TogglePayload,
-	MusicNoteState
+	MusicNoteState,
+	clear,
 } from './musicnotesSlice';
 import {Row, Container, Button } from 'react-bootstrap';
 import styles from './Musicnotes.module.css';
@@ -62,6 +63,7 @@ const renderControls = (state: MusicNoteState, dispatch: Function) => {
 				<Button className={styles.playButton} onClick={playButtonFunction}>{buttonText}</Button>
 				<Button className={styles.playButton} onClick={() => dispatch(randomize())}>Randomize</Button>
 				<Button className={styles.playButton} onClick={() => dispatch(restart())}>Restart</Button>
+				<Button className={styles.playButton} onClick={() => dispatch(clear())}>Clear</Button>
 			</Row>
 			<Row>
 				<p>{state.bpm}</p>

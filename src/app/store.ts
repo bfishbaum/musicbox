@@ -3,6 +3,7 @@ import counterReducer from '../features/counter/counterSlice';
 import musicnotesReducer from '../features/musicnotes/musicnotesSlice';
 import soundboardReducer from '../features/soundboard/soundboardSlice';
 import toplevelReducer from '../features/toplevel/toplevelSlice';
+import ukuleleReducer from '../features/ukulele/ukuleleSlice';
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
@@ -14,7 +15,8 @@ export const store = configureStore({
 		toplevel: toplevelReducer,
     counter: counterReducer,
     musicnotes: musicnotesReducer,
-    soundboard: soundboardReducer,
+		soundboard: soundboardReducer,
+		ukulele: ukuleleReducer,
   },
 });
 

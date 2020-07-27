@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from '../../app/store';
 import { TriggerAttackRelease, PlayNotes, PlayMyNote } from '../../music/synth.js';
-import {pianoNotes} from '../../music/notesheets/piano'
+import {pianoNotes} from '../../music/instruments/piano'
 
 export interface SoundboardState {
 	notes: Array<string>;

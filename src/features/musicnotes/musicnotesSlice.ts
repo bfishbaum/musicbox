@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from '../../app/store';
-import { TriggerAttackRelease, PlayNotes } from '../../music/synth.js';
+import { PlayNotes } from '../../music/instruments/ViolinSynth';
 
 const defaultBPM = 200
 const defaultNotes = 16
-const defaultColumns = 8
+const defaultColumns = 12
 
 export interface MusicNoteState {
   bpm: number;
@@ -44,7 +44,7 @@ export const musicnotesSlice = createSlice({
 			if(state.currentTime >= notes.length) {
 				state.currentTime = 0;
 			}
-			PlayNotes(state.notes[state.currentTime])
+			PlayNotes(state.notes[state.currentTime], state.bpm)
 		},
 		setPlaying: (state, action: PayloadAction<any>) => {
 			state.playing = true
@@ -66,13 +66,16 @@ export const musicnotesSlice = createSlice({
 		setBPM: (state, action: PayloadAction<number>) => {
 			state.bpm = action.payload
 		},
+		clear: (state) => {
+			state.notes = state.notes.map((x) => x.map(y => false))
+		},
 		share: state => {
 
 		},
   },
 });
 
-export const { toggleNote, beat, setPlaying, pause, randomize, share, restart, setBPM } = musicnotesSlice.actions;
+export const { toggleNote, beat, clear, setPlaying, pause, randomize, share, restart, setBPM } = musicnotesSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

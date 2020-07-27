@@ -13,6 +13,7 @@ import {
 
 import { MusicNotes } from '../../features/musicnotes/Musicnotes';
 import { Soundboard } from '../../features/soundboard/Soundboard';
+import { Ukulele } from '../../features/ukulele/Ukulele';
 import {Row, Container, Button, Nav } from 'react-bootstrap';
 import styles from './Toplevel.module.css';
 
@@ -23,7 +24,7 @@ export function Toplevel() {
   return (
 		<div>
 			<Container>
-			<Nav variant="pills" defaultActiveKey="musicbox" onSelect={(key:string) => {
+			<Nav variant="pills" defaultActiveKey={currentPage} onSelect={(key:string) => {
 				dispatch(switchPage(key))
 				if(key === "soundboard") {
 						dispatch(pause())
@@ -36,11 +37,15 @@ export function Toplevel() {
 				<Nav.Item>
 					<Nav.Link eventKey={"soundboard"}>Soundboard</Nav.Link>
 				</Nav.Item>
+				<Nav.Item>
+					<Nav.Link eventKey={"ukulele"}>Ukulele</Nav.Link>
+				</Nav.Item>
 			</Nav>
     <Container>
 		<h1>{currentPage}</h1>
 			{currentPage === "musicbox" && <MusicNotes/>}
 			{currentPage === "soundboard" && <Soundboard/>}
+			{currentPage === "ukulele" && <Ukulele/>}
     </Container>
 		</Container>
 		</div>

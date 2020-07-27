@@ -1,8 +1,11 @@
-import { PolySynth, Synth } from 'tone';
+import { PolySynth, Synth, AMSynth } from 'tone';
 
-const synth = new PolySynth(4, Synth, {
+const synth = new PolySynth(8, AMSynth, {
 	oscillator : {
 		type : 'triangle'
+	},
+	envelope: {
+		attack: 0.1
 	}
 }).toMaster();
 synth.set('detune', -1200);
@@ -14,9 +17,10 @@ const PENTATONIC = [
 	'G5', 'A5', 'C6', 'D6',
 ]
 
-export const PlayNotes = (noteArray) => {
+export const PlayNotes = (noteArray, bpm) => {
 	var notes = PENTATONIC.filter((v,i) => noteArray[i])
-	synth.triggerAttackRelease(notes, '8n')
+	var time = bpm > 140 ? '8n': '6n'
+	synth.triggerAttackRelease(notes, time)
 }
 
 export const PlayMyNote = (note, time) => {
