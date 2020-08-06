@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from '../../app/store';
-import { PlayNotes } from '../../music/instruments/ViolinSynth';
+import { PlayNotes, SetDetune } from '../../music/instruments/ViolinSynth';
 
 const defaultBPM = 200
 const defaultNotes = 16
-const defaultColumns = 12
+const defaultColumns = 4
 
 export interface MusicNoteState {
   bpm: number;
@@ -12,6 +12,7 @@ export interface MusicNoteState {
   playing: boolean;
 	currentTime: number;
 	playIntervalID?: any;
+	detune: number;
 }
 
 export interface TogglePayload {
@@ -27,7 +28,8 @@ const initialState: MusicNoteState = {
 	bpm: defaultBPM,
 	notes: notes,
 	playing: false,
-	currentTime: -1
+	currentTime: -1,
+	detune: -1200,
 };
 
 
@@ -66,6 +68,10 @@ export const musicnotesSlice = createSlice({
 		setBPM: (state, action: PayloadAction<number>) => {
 			state.bpm = action.payload
 		},
+		setDetune: (state, action: PayloadAction<number>) => {
+			state.detune = action.payload
+			SetDetune(action.payload)
+		},
 		clear: (state) => {
 			state.notes = state.notes.map((x) => x.map(y => false))
 		},
@@ -75,7 +81,7 @@ export const musicnotesSlice = createSlice({
   },
 });
 
-export const { toggleNote, beat, clear, setPlaying, pause, randomize, share, restart, setBPM } = musicnotesSlice.actions;
+export const { toggleNote, beat, clear, setPlaying, pause, randomize, share, restart, setBPM, setDetune } = musicnotesSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

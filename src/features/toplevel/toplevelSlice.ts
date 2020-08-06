@@ -6,7 +6,7 @@ export interface ToplevelState {
 }
 
 const initialState: ToplevelState = {
-	page: "musicbox"
+	page: "background"
 };
 
 

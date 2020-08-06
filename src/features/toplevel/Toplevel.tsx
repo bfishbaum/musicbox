@@ -16,6 +16,7 @@ import { Soundboard } from '../../features/soundboard/Soundboard';
 import { Ukulele } from '../../features/ukulele/Ukulele';
 import {Row, Container, Button, Nav } from 'react-bootstrap';
 import styles from './Toplevel.module.css';
+import { Background } from '../background/Background';
 
 export function Toplevel() {
 	const dispatch : Function = useDispatch();
@@ -26,7 +27,7 @@ export function Toplevel() {
 			<Container>
 			<Nav variant="pills" defaultActiveKey={currentPage} onSelect={(key:string) => {
 				dispatch(switchPage(key))
-				if(key === "soundboard") {
+				if(key !== "musicbox") {
 						dispatch(pause())
 						dispatch(restart())
 				}
@@ -40,12 +41,16 @@ export function Toplevel() {
 				<Nav.Item>
 					<Nav.Link eventKey={"ukulele"}>Ukulele</Nav.Link>
 				</Nav.Item>
+				<Nav.Item>
+					<Nav.Link eventKey={"background"}>AI Band</Nav.Link>
+				</Nav.Item>
 			</Nav>
     <Container>
 		<h1>{currentPage}</h1>
 			{currentPage === "musicbox" && <MusicNotes/>}
 			{currentPage === "soundboard" && <Soundboard/>}
 			{currentPage === "ukulele" && <Ukulele/>}
+			{currentPage === "background" && <Background/>}
     </Container>
 		</Container>
 		</div>

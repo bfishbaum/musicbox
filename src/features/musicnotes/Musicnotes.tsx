@@ -6,6 +6,7 @@ import {
 	play,
 	pause,
 	setBPM,
+	setDetune,
 	randomize,
 	restart,
 	toggleNote,
@@ -66,14 +67,30 @@ const renderControls = (state: MusicNoteState, dispatch: Function) => {
 				<Button className={styles.playButton} onClick={() => dispatch(clear())}>Clear</Button>
 			</Row>
 			<Row>
+				<Row>
 				<p>{state.bpm}</p>
+			</Row>
+			<Row>
 				<Slider
 					axis={"x"}
 					x={state.bpm}
-					xmin={100}
+					xmin={120}
 					xmax={600}
 					onChange={({x}) => dispatch(setBPM(x))}/>
 			</Row>
+			</Row>
+			<Row>
+				<Row>
+				<p>{state.detune}</p>
+			</Row>
+			<Row>
+				<Slider
+					axis={"x"}
+					x={state.detune}
+					xmin={-2000}
+					xmax={600}
+					onChange={({x}) => dispatch(setDetune(x))}/>
+			</Row></Row>
 		</div>
 	)
 }

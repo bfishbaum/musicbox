@@ -4,6 +4,7 @@ import musicnotesReducer from '../features/musicnotes/musicnotesSlice';
 import soundboardReducer from '../features/soundboard/soundboardSlice';
 import toplevelReducer from '../features/toplevel/toplevelSlice';
 import ukuleleReducer from '../features/ukulele/ukuleleSlice';
+import backgroundReducer from '../features/background/backgroundSlice';
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
@@ -17,6 +18,7 @@ export const store = configureStore({
     musicnotes: musicnotesReducer,
 		soundboard: soundboardReducer,
 		ukulele: ukuleleReducer,
+		background: backgroundReducer
   },
 });
 

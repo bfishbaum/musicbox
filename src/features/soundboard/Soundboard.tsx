@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Slider from 'react-input-slider';
 import {
 	playNote,
+	playDrumNote,
 	setNoteTime,
 	selectNotes,
 	selectAll,
@@ -14,6 +15,12 @@ import styles from './Soundboard.module.css';
 const renderNote = (note: string, index: number, dispatch: Function) => {
 	return (
 		<div className={styles.offtoggle} onClick={() => dispatch(playNote(index))}>{note}</div>
+	)
+}
+
+const renderDrumNote = (note: string, index: number, dispatch: Function) => {
+	return (
+		<div className={styles.offtoggle} onClick={() => dispatch(playDrumNote(note))}>{note}</div>
 	)
 }
 
@@ -41,6 +48,8 @@ export function Soundboard() {
     <Container>
 			{controlPanel(soundboardState.noteTime, dispatch)}
 			<Row>{soundboardState.notes.map((v,i) => renderNote(v, i, dispatch))}</Row>
+			<br></br>
+			<Row>{soundboardState.notes.map((v,i) => renderDrumNote(v, i, dispatch))}</Row>
     </Container>
   );
 }

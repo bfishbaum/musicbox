@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from '../../app/store';
 import { TriggerAttackRelease, PlayNotes, PlayMyNote } from '../../music/synth.js';
 import {pianoNotes} from '../../music/instruments/piano'
+import { PlayDrumNote } from '../../music/instruments/DrumSynth';
 
 export interface SoundboardState {
 	notes: Array<string>;
@@ -24,11 +25,14 @@ export const soundboardSlice = createSlice({
 		},
 		setNoteTime: (state, action: PayloadAction<number>) => {
 			state.noteTime = action.payload
+		},
+		playDrumNote: (state, action: PayloadAction<string>) => {
+			PlayDrumNote(action.payload, '8n')
 		}
   },
 });
 
-export const { playNote, setNoteTime } = soundboardSlice.actions;
+export const { playNote, playDrumNote, setNoteTime } = soundboardSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

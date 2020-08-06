@@ -22,3 +22,11 @@ export function strumUke () {
 
 export function hitAmpEnv() {
 }
+
+export function makeUkeSynth() {
+	return new PluckSynth({
+		attackNoise: 0.2,
+		dampening: 4000,
+		resonance: 0.97,
+	})
+}
