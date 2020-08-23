@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from '../../app/store';
-import { mainPlay, mainPause, mainRemakeSong, getTime } from '../../music/maketrack/main.js'
+import { mainPlay, mainPause, mainRemakeSong, getTime, setMainBPM } from '../../music/maketrack/main.js'
 
 export interface SongPart {
 		note: string
@@ -15,13 +15,20 @@ export interface BackgroundState {
 		playing: boolean
 		time: number 
 		syncing: boolean
+		bpm: number
+}
+
+export interface EncodedSongState {
+	song : Array<SongPart>
+	bpm: number
 }
 
 const initialState: BackgroundState = {
 	song: [],
 	playing: false,
 	time: 0,
-	syncing: false 
+	syncing: false,
+	bpm: 120
 };
 
 export const backgroundSlice = createSlice({
@@ -39,19 +46,28 @@ export const backgroundSlice = createSlice({
 		randomize: state => {
 			state.song = mainRemakeSong()
 		},
-		share: state => {
-
+		makeURL: state => {
+			var song: EncodedSongState = {song: state.song, bpm: state.bpm}
+			var urlEncoding = encodeURIComponent(JSON.stringify(song))
+			console.log(urlEncoding)
 		},
 		syncTime: (state, action:PayloadAction<number>) => {
 			state.time = action.payload
 		},
 		setSync: state => {
 			state.syncing = true
+		},
+		setBPM: (state, action:PayloadAction<number>) => {
+			state.bpm = action.payload
+			setMainBPM(action.payload)
+		},
+		share: state => {
+
 		}
   },
 });
 
-export const { pause, play, randomize, share, syncTime, setSync } = backgroundSlice.actions;
+export const { pause, play, randomize, share, syncTime, setSync, setBPM } = backgroundSlice.actions;
 
 export const sync = (): AppThunk => dispatch => {
 	dispatch(setSync())

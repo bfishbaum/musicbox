@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectAll, BackgroundState } from './backgroundSlice';
-import {Row, Container, Button } from 'react-bootstrap';
+import {Row, Container, Button, Col } from 'react-bootstrap';
+import Slider from 'react-input-slider';
 import styles from './Background.module.css';
 import { Stage, Layer, Rect, Text, Circle, Line } from 'react-konva';
 import {
-	play, pause, randomize, SongPart, sync
-} from './backgroundSlice';
+	play, pause, randomize, SongPart, sync, setBPM, selectAll, 
+	BackgroundState, EncodedSongState
+} 
+from './backgroundSlice';
 import { PENTATONIC } from '../../music/instruments/ViolinSynth'
 import { NOTES } from '../../music/maketrack/main'
 
 const notesSheet = NOTES
-var rowPixels = 60
+var rowPixels = 30
 var totalTime = 64 
 var timePixels = 8
 var numNotes = notesSheet.length
@@ -20,8 +22,20 @@ var canvasWidth = 600
 var canvasHeight = 300
 var trackerHeight = (numNotes) * rowPixels
 
-const noteToColor = (note: string, notes: Array<string>) => {
+const makeURL = (state: BackgroundState) => {
+	var song: EncodedSongState = {song: state.song, bpm: state.bpm}
+	var urlEncoding = encodeURIComponent(JSON.stringify(song))
+	console.log(urlEncoding)
+	return urlEncoding
+}
 
+
+const convertTimeBack = (time: string) => {
+	return time.split(":").map((v,i) => parseInt(v) * 16 / (Math.pow(4,i))).reduce((a,b)=>a+b, 0)
+}
+
+const noteToColor = (note: string, notes: Array<string>) => {
+	return "red"
 }
 
 const noteToHeight = (note: string, notes: Array<string>) => {
@@ -29,17 +43,17 @@ const noteToHeight = (note: string, notes: Array<string>) => {
 }
 
 const drawSongPart = (songPart: SongPart) => {
-	var l = songPart.normLength
+	var l = convertTimeBack(songPart.length)
 	var t = songPart.startTime
 	var h = noteToHeight(songPart.note, notesSheet)
 	return (
-		<Rect x={rowPixels+timePixels*t+1} y={h-(rowPixels/8)} width={l*timePixels-2} height={rowPixels/4} fill="red"/>
+		<Rect x={rowPixels+timePixels*t} y={h-(rowPixels/2)} width={l*timePixels} height={rowPixels} fill="red"/>
 	)
 }
 
 const drawTracker = (time: number) => {
 	return (
-		<Line x={rowPixels + totalTime * timePixels * time} y={(canvasHeight-trackerHeight)/2} points={[0,0,0, trackerHeight]} stroke="blue"/>
+		<Line x={rowPixels + totalTime * timePixels * time} y={rowPixels/2} points={[0,0,0, trackerHeight]} stroke="blue"/>
 	)
 }
 
@@ -87,8 +101,26 @@ const makeToggle = (dispatch: Function, isPlaying: boolean) => {
 		<Row>
 			<Button className={styles.playButton} onClick={buttonFunction}>{buttonText}</Button>
 			<Button className={styles.playButton} onClick={() => dispatch(randomize())}>New Song</Button> 
+			<Button className={styles.playButton} onClick={() => dispatch(randomize())}>Share</Button> 
 		</Row>
 	)
+}
+
+const makeControl = (dispatch: Function, state: BackgroundState) => {
+	return (
+			<Row>
+				<Col>
+				<h3>BPM: {state.bpm}</h3>
+				</Col>
+				<Col>
+				<Slider
+					axis={"x"}
+					x={state.bpm}
+					xmin={61}
+					xmax={300}
+					onChange={({x}) => dispatch(setBPM(x))}/>
+				</Col>
+			</Row>)
 }
 
 
@@ -107,6 +139,7 @@ export function Background() {
 		<div>
 			<Container>
 				{makeToggle(dispatch, playing)}
+				{makeControl(dispatch, backgroundState)}
 				{makeSongCanvas(song, time)}
 			</Container>
 		</div>

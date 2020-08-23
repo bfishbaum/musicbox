@@ -75,5 +75,6 @@ export function makeSongV2(notes, bars) {
 		song = song.concat(beat)	
 	}
 	var ssong = song.map((v) => sanitizeTimes(v))
+	console.log(ssong)
 	return ssong
 }

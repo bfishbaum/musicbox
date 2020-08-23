@@ -41,6 +41,9 @@ export const mainPause = () => {
 
 export function getTime() {
 	var x = part.progress
-	console.log(x)
 	return x
+}
+
+export function setMainBPM(b) {
+	TT.bpm.value = b
 }
